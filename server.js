@@ -37,18 +37,18 @@ async function initializeDatabase() {
     "SELECT COUNT(*) FROM menu_items"
   );
 
-  if (Number(count.rows[0].count) === 0) {
-    await pool.query(`
-      INSERT INTO menu_items
-      (name, description, category, price, image)
-      VALUES
-      ('Cheeseburger', 'Juicy beef burger with cheese', 'Burger', 120, ''),
-      ('Pepperoni Pizza', 'Classic pepperoni pizza', 'Pizza', 280, ''),
-      ('French Fries', 'Crispy golden fries', 'Snacks', 80, ''),
-      ('Fried Chicken', 'Crispy fried chicken meal', 'Chicken', 150, ''),
-      ('Spaghetti', 'Filipino style spaghetti', 'Pasta', 110, '')
-    `);
-  }
+ if (Number(count.rows[0].count) === 0) {
+  await pool.query(`
+    INSERT INTO menu_items
+    (name, description, category, price, image)
+    VALUES
+    ('Cheeseburger', 'Juicy beef burger with cheese', 'Meals', 120, '/images/burger.jpg'),
+    ('Pepperoni Pizza', 'Classic pepperoni pizza', 'Meals', 280, '/images/pizza.jpg'),
+    ('French Fries', 'Crispy golden fries', 'Snacks', 80, '/images/fries.jpg'),
+    ('Fried Chicken', 'Crispy fried chicken meal', 'Meals', 150, '/images/chicken.jpg'),
+    ('Spaghetti', 'Filipino style spaghetti', 'Meals', 110, '/images/spaghetti.jpg')
+  `);
+}
 }
 function adminOnly(req, res, next) {
   const password = req.headers["x-admin-password"];
